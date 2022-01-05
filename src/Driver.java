@@ -9,7 +9,7 @@ import com.mongodb.client.MongoDatabase;
 public class Driver {
 
 	public static void main(String[] args) {
-		initializeDatabase();
+//		initializeDatabase();
 		
 		BrowserDatabase browser = new BrowserDatabase();
 		
@@ -32,6 +32,8 @@ public class Driver {
 		MongoClient client = MongoClients.create();
 		MongoDatabase database = client.getDatabase("mydatabase");
 		MongoCollection<Document> collection = database.getCollection("mycollection");
+		
+//		collection.drop();
 		
 		double count = Math.random() * 20 + 5; // 5-25 Random documents
 		for(int i = 1; i <= count; i++) {
