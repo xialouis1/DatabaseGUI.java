@@ -25,25 +25,30 @@ public class BrowserDatabase {
 	}
 	
 	private void addComponent() {
+
 		JMenuBar menubar = new JMenuBar();
 		JMenu m1 = new JMenu("File");
 		JMenuItem m11 = new JMenuItem("Open");
-		m11.addActionListener(new ActionDatabaseConnection());
+		
+		m11.addActionListener(new ActionDatabaseConnection(frame));
 		m1.add(m11);
 		menubar.add(m1);
+		
 		frame.getContentPane().add(BorderLayout.NORTH, menubar);
-		
-		JTable table = new JTable();
-		table.setAutoCreateRowSorter(true);
-		tableModel = new DefaultTableModel(0, 0);
-		table.setModel(tableModel);
-		table.setDefaultEditor(Object.class, null);
 
+		JTable table = new JTable();
 		JScrollPane panel = new JScrollPane(table);
-		frame.getContentPane().add(BorderLayout.CENTER, panel);
+		tableModel = new DefaultTableModel(0, 0);
+
+		table.setDefaultEditor(Object.class, null);
+		table.setAutoCreateRowSorter(true);
+		table.setModel(tableModel);
 		
+		frame.getContentPane().add(BorderLayout.CENTER, panel);
+
 		JButton button = new JButton("Select");
 		button.addActionListener(new ActionTableSelect(table));
+		
 		frame.getContentPane().add(BorderLayout.SOUTH, button);
 	}
 

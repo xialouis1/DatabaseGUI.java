@@ -1,11 +1,10 @@
 import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
-import javax.swing.JTextArea;
+import javax.swing.JLabel;
 
 import org.bson.Document;
 import org.bson.conversions.Bson;
-import org.bson.types.ObjectId;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
@@ -15,7 +14,8 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 
 public class BrowserDocument {
-	public BrowserDocument(ObjectId id) {
+	
+	public BrowserDocument(Object id) {
 		MongoClient client = MongoClients.create();
 		MongoDatabase database = client.getDatabase("mydatabase");
 		MongoCollection<Document> collection = database.getCollection("mycollection");
@@ -33,9 +33,9 @@ public class BrowserDocument {
 		JFrame frame = new JFrame();
 		frame.setLocationRelativeTo(null);
 		
-		JTextArea textId = new JTextArea((String) document.get("_id").toString());
-		JTextArea textRank = new JTextArea((String) document.get("age").toString());
-		JTextArea textAge = new JTextArea((String) document.get("group").toString());
+		JLabel textId = new JLabel((String) document.get("_id").toString());
+		JLabel textRank = new JLabel((String) document.get("age").toString());
+		JLabel textAge = new JLabel((String) document.get("group").toString());
 
 		frame.add(BorderLayout.NORTH, textId);
 		frame.add(BorderLayout.CENTER, textRank);
@@ -48,4 +48,5 @@ public class BrowserDocument {
 			// Duplicate id. Error?
 		}
 	}
+	
 }
