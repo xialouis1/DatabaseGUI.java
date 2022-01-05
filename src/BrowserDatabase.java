@@ -11,11 +11,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public class Browser {
+public class BrowserDatabase {
 	JFrame frame;
 	DefaultTableModel tableModel;
 	
-	public Browser() {
+	public BrowserDatabase() {
 		frame = new JFrame("My First GUI");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(400, 300);

@@ -4,6 +4,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
+import org.bson.types.ObjectId;
+
 public class ActionTableSelect implements ActionListener {
 	JTable table;
 	
@@ -24,8 +26,9 @@ public class ActionTableSelect implements ActionListener {
 				throw new ArrayIndexOutOfBoundsException(col);
 			}
 			
-			Object selected = table.getValueAt(row, 0);
+			ObjectId selected = (ObjectId) table.getValueAt(row, 0);
 			System.out.printf("_id: %s%n", selected);
+			new BrowserDocument(selected);
 		} catch (ArrayIndexOutOfBoundsException exception) {
 			arrayOutOfBounds();
 		}

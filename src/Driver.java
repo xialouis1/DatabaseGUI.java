@@ -9,7 +9,7 @@ import com.mongodb.client.MongoDatabase;
 public class Driver {
 
 	public static void main(String[] args) {
-		Browser browser = new Browser();
+		BrowserDatabase browser = new BrowserDatabase();
 		
 		MongoClient client = MongoClients.create();
 		MongoDatabase database = client.getDatabase("mydatabase");
