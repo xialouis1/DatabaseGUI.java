@@ -36,6 +36,7 @@ public class Browser {
 		frame.getContentPane().add(BorderLayout.NORTH, menubar);
 		
 		JTable table = new JTable();
+		table.setAutoCreateRowSorter(true);
 		tableModel = new DefaultTableModel(0, 0);
 		table.setModel(tableModel);
 		table.setDefaultEditor(Object.class, null);
@@ -44,11 +45,7 @@ public class Browser {
 		frame.getContentPane().add(BorderLayout.CENTER, panel);
 		
 		JButton button = new JButton("Select");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.printf("%d, %d%n", table.getSelectedRow(), table.getSelectedColumn());
-			}
-		});
+		button.addActionListener(new ActionTableSelect(table));
 		frame.getContentPane().add(BorderLayout.SOUTH, button);
 	}
 
