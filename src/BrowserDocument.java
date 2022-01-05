@@ -34,8 +34,8 @@ public class BrowserDocument {
 		frame.setLocationRelativeTo(null);
 		
 		JTextArea textId = new JTextArea((String) document.get("_id").toString());
-		JTextArea textRank = new JTextArea((String) document.get("Rank").toString());
-		JTextArea textAge = new JTextArea((String) document.get("Age").toString());
+		JTextArea textRank = new JTextArea((String) document.get("rank").toString());
+		JTextArea textAge = new JTextArea((String) document.get("age").toString());
 
 		frame.add(BorderLayout.NORTH, textId);
 		frame.add(BorderLayout.CENTER, textRank);
