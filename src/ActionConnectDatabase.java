@@ -3,7 +3,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+import javax.swing.text.JTextComponent;
 
 import org.bson.Document;
 
@@ -15,20 +15,17 @@ import com.mongodb.client.MongoDatabase;
 
 public class ActionConnectDatabase implements ActionListener {
 	JFrame frame;
-	JTextField fieldDatabase;
-	JTextField fieldCollection;
+	String databaseName;
+	String collectionName;
 	BrowserDatabase browser;
 	
-	public ActionConnectDatabase(JFrame frame, JTextField fieldDatabase, JTextField fieldCollection) {
+	public ActionConnectDatabase(JFrame frame, String fieldDatabase, String fieldCollection) {
 		this.frame = frame;
-		this.fieldDatabase = fieldDatabase;
-		this.fieldCollection = fieldCollection;
+		this.databaseName = fieldDatabase;
+		this.collectionName = fieldCollection;
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		String databaseName = fieldDatabase.getText();
-		String collectionName = fieldCollection.getText();
-		
 		// Error handling before closing dialog
 		if(databaseName.length() < 1) {
 			String title = "Error";
@@ -43,7 +40,7 @@ public class ActionConnectDatabase implements ActionListener {
 
 			browser = new BrowserDatabase();
 			
-			MongoClient client = MongoClients.create();
+			MongoClient client = Driver.CLIENT;
 			MongoDatabase database = client.getDatabase(databaseName);
 			MongoCollection<Document> collection = database.getCollection(collectionName);
 			MongoCursor<Document> cursor = collection.find().iterator();

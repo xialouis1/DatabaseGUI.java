@@ -6,8 +6,11 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
 public class Driver {
+	static MongoClient CLIENT;
 
 	public static void main(String[] args) {
+		CLIENT = MongoClients.create();
+		
 //		initializeDatabase();
 		
 		new BrowserConnection();
