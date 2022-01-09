@@ -1,3 +1,5 @@
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
@@ -7,19 +9,24 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import org.bson.Document;
+
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
+
+import old.Driver;
+
 public class UICollection extends UI {
-	DefaultTableModel tableModel;
+	static DefaultTableModel tableModel;
 
 	@Override
 	protected void addComponent() {
 		JPanel panel = new JPanel();
 		
-		panel.setLayout(new GridBagLayout());
+		panel.setLayout(new BorderLayout());
 		add(panel);
-		
-		GridBagConstraints constraints = new GridBagConstraints();
-		constraints.gridwidth = 1;
-		constraints.gridheight = 1;
 		
 		JTable table = new JTable();
 		table.setDefaultEditor(Object.class, null);
@@ -27,25 +34,29 @@ public class UICollection extends UI {
 
 		tableModel = new DefaultTableModel(0, 0);
 		table.setModel(tableModel);
-
-		constraints.gridx = 0;
-		constraints.gridy = 0;
-		JScrollPane scrollpane = new JScrollPane(table);
-		panel.add(scrollpane, constraints);
 		
-		constraints.gridx = 0;
-		constraints.gridy = 1;
+		JScrollPane scrollpane = new JScrollPane(table);
+		panel.add(scrollpane, BorderLayout.CENTER);
+
 		JButton button = new JButton("Select");
 		button.addActionListener(null);
-		panel.add(button, constraints);
+		panel.add(button, BorderLayout.SOUTH);
+		
+		addTableData();
 	}
 	
 	private void addTableData() {
+		MongoCursor<Document> cursor = DatabaseGUI.COLLECTION.find().iterator();
 		
-	
-		for(int i = 0; i < tableModel.getRowCount(); i++) {
-			tableModel.removeRow(i);
-		}
+		if(cursor.hasNext()) {
+			Document document = cursor.next();
+			addColumnName(document.keySet().toArray());
+			while(cursor.hasNext()) {
+				addRowData(document.values().toArray());
+				document = cursor.next();
+			}
+		} 
+		
 	}
 
 	public void addRowData(Object[] objects) {
