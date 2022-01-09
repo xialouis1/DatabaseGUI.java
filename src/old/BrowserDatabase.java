@@ -1,3 +1,4 @@
+package old;
 import java.awt.BorderLayout;
 
 import javax.swing.JButton;
@@ -14,7 +15,7 @@ public class BrowserDatabase {
 	DefaultTableModel tableModel;
 	
 	public BrowserDatabase() {
-		frame = new JFrame("My First GUI");
+		frame = new JFrame("Collection Name");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(400, 300);
 		frame.setLocationRelativeTo(null);
