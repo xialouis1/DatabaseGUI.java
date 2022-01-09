@@ -2,6 +2,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -20,6 +22,7 @@ import old.Driver;
 
 public class UICollection extends UI {
 	static DefaultTableModel tableModel;
+	static JTable table;
 
 	@Override
 	protected void addComponent() {
@@ -28,7 +31,7 @@ public class UICollection extends UI {
 		panel.setLayout(new BorderLayout());
 		add(panel);
 		
-		JTable table = new JTable();
+		table = new JTable();
 		table.setDefaultEditor(Object.class, null);
 		table.setAutoCreateRowSorter(true);
 
@@ -39,7 +42,7 @@ public class UICollection extends UI {
 		panel.add(scrollpane, BorderLayout.CENTER);
 
 		JButton button = new JButton("Select");
-		button.addActionListener(null);
+		button.addActionListener(new ActViewDocument());
 		panel.add(button, BorderLayout.SOUTH);
 		
 		addTableData();

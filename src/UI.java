@@ -15,7 +15,7 @@ public abstract class UI extends JFrame {
 		
 		JMenu menu1 = new JMenu("File");
 		JMenuItem menuitem11 = new JMenuItem("Reconnect");
-		menuitem11.addActionListener(null);
+		menuitem11.addActionListener(new ActConnectionUI());
 		menu1.add(menuitem11);
 		menubar.add(menu1);
 		

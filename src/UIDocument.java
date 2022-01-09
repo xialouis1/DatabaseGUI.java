@@ -2,6 +2,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
 import javax.swing.BorderFactory;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -9,6 +10,10 @@ public class UIDocument extends UI {
 
 	@Override
 	protected void addComponent() {
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setSize(200, 150);
+		setLocationRelativeTo(null);
+		
 		JPanel panel = new JPanel();
 		
 		panel.setLayout(new GridBagLayout());
@@ -23,17 +28,17 @@ public class UIDocument extends UI {
 		
 		constraints.gridx = 0;
 		constraints.gridy = 0;
-		JLabel labelId = new JLabel("ID: ");
+		JLabel labelId = new JLabel("ID: " + DatabaseGUI.DOCUMENT.get("_id"));
 		panel.add(labelId, constraints);
 		
 		constraints.gridx = 0;
 		constraints.gridy = 1;
-		JLabel labelAge = new JLabel("Age: ");
+		JLabel labelAge = new JLabel("Age: " + DatabaseGUI.DOCUMENT.get("age"));
 		panel.add(labelAge, constraints);
 		
 		constraints.gridx = 0;
 		constraints.gridy = 2;
-		JLabel labelRank = new JLabel("Rank: ");
+		JLabel labelRank = new JLabel("Rank: " + DatabaseGUI.DOCUMENT.get("rank"));
 		panel.add(labelRank, constraints);
 	}
 

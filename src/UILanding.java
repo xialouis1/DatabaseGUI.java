@@ -30,7 +30,7 @@ public class UILanding extends UI {
 //		fieldDatabase.setEditable(true);
 		fieldDatabase.setSelectedIndex(3);
 		panel.add(fieldDatabase, constraints);
-		fieldDatabase.addActionListener(new ActFieldDatabase());
+		fieldDatabase.addActionListener(new ActChangeDatabaseSelection());
 
 		constraints.gridx = 0;
 		constraints.gridy = 0;
@@ -55,7 +55,7 @@ public class UILanding extends UI {
 		constraints.gridx = 0;
 		constraints.gridy = 2;
 		JButton button = new JButton("Connect");
-		button.addActionListener(new ActButtonConnect());
+		button.addActionListener(new ActConnectToDatabase());
 		panel.add(button, constraints);
 	}
 	

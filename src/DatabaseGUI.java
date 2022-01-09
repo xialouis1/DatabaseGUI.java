@@ -1,12 +1,15 @@
 import java.util.Vector;
 
 import org.bson.Document;
+import org.bson.conversions.Bson;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoIterable;
+import com.mongodb.client.model.Filters;
 
 public class DatabaseGUI {
 	static MongoClient CLIENT;
@@ -40,8 +43,8 @@ public class DatabaseGUI {
 			double document_limit = Math.random() * 10 + 5; // 5-15 Random documents
 			for(int j = 0; j <= document_limit; j++) {
 				Document document = new Document("_id", j);
-				document.append("age_" + i, (int) (Math.random() * 59 + 1));
-				document.append("rank_" + i, (int) (Math.random() * 4 + 1));
+				document.append("age", (int) (Math.random() * 59 + 1));
+				document.append("rank", (int) (Math.random() * 4 + 1));
 				
 				collection.insertOne(document);
 			}
@@ -72,14 +75,24 @@ public class DatabaseGUI {
 	}
 	
 	public static void setCollection(String database, String collection) {
-		COLLECTION = CLIENT.getDatabase(database).getCollection(collection);
+		MongoClient client = MongoClients.create();
+		DATABASE = client.getDatabase(database);
+		COLLECTION = DATABASE.getCollection(collection);
 	}
 	
 	public static void getDocument() {
 		
 	}
 	
-	public static void setDocument() {
+	public static void setDocument(Object id) {
+		Bson filter = Filters.eq("_id", (int) id);
 		
+		MongoCursor<Document> cursor = COLLECTION.find(filter).iterator();
+		
+		if(cursor.hasNext()) {
+			DOCUMENT = cursor.next();
+		} else {
+			System.out.println("not found");
+		}
 	}
 }
