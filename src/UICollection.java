@@ -18,8 +18,6 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 
-import old.Driver;
-
 public class UICollection extends UI {
 	static DefaultTableModel tableModel;
 	static JTable table;
