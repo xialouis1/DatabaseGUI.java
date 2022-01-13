@@ -10,6 +10,7 @@ import javax.swing.table.DefaultTableModel;
 import org.bson.Document;
 
 import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
 
 public class UICollection extends UI {
 	static DefaultTableModel tableModel;
