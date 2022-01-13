@@ -1,11 +1,7 @@
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -13,16 +9,12 @@ import javax.swing.table.DefaultTableModel;
 
 import org.bson.Document;
 
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
-import com.mongodb.client.MongoDatabase;
-
-import old.Driver;
 
 public class UICollection extends UI {
 	static DefaultTableModel tableModel;
 	static JTable table;
+	static JLabel errorLabel;
 
 	@Override
 	protected void addComponent() {
@@ -40,10 +32,17 @@ public class UICollection extends UI {
 		
 		JScrollPane scrollpane = new JScrollPane(table);
 		panel.add(scrollpane, BorderLayout.CENTER);
+		
+		JPanel pane = new JPanel();
+		panel.add(pane, BorderLayout.SOUTH);
+
+		errorLabel = new JLabel("No selection was made.");
+		errorLabel.setVisible(false);
+		pane.add(errorLabel, BorderLayout.CENTER);
 
 		JButton button = new JButton("Select");
 		button.addActionListener(new ActViewDocument());
-		panel.add(button, BorderLayout.SOUTH);
+		pane.add(button, BorderLayout.SOUTH);
 		
 		addTableData();
 	}
@@ -68,6 +67,10 @@ public class UICollection extends UI {
 	
 	public void addColumnName(Object[] names) {
 		tableModel.setColumnIdentifiers(names);
+	}
+	
+	public static void showError(boolean flag) {
+		errorLabel.setVisible(flag);
 	}
 
 }
