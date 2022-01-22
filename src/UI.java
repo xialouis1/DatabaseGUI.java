@@ -20,7 +20,6 @@ public abstract class UI extends JFrame {
 		menubar.add(menu1);
 		
 		addComponent();
-		
 		setVisible(true);
 	}
 
