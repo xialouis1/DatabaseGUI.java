@@ -1,45 +1,42 @@
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Window;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import org.bson.Document;
 
 public class UIDocument extends UI {
 
+
 	@Override
 	protected void addComponent() {
-		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		setSize(200, 150);
-		setLocationRelativeTo(null);
-		
 		JPanel panel = new JPanel();
 		
-		panel.setLayout(new GridBagLayout());
+		panel.setLayout(new FlowLayout());
 		panel.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createTitledBorder("Database Connection"),
                 BorderFactory.createEmptyBorder(5, 5, 5, 5)));
 		add(panel);
 		
-		GridBagConstraints constraints = new GridBagConstraints();
-		constraints.gridwidth = 1;
-		constraints.gridheight = 1;
+		Document document = DatabaseGUI.DOCUMENT;
+		for(String key: document.keySet()) {
+			JLabel labelKey = new JLabel(key);
+			panel.add(labelKey);
+			
+			String value = "" + document.get(key);
+			JTextField textValue = new JTextField(value, 10);
+			panel.add(textValue);
+		}
 		
-		constraints.gridx = 0;
-		constraints.gridy = 0;
-		JLabel labelId = new JLabel("ID: " + DatabaseGUI.DOCUMENT.get("_id"));
-		panel.add(labelId, constraints);
-		
-		constraints.gridx = 0;
-		constraints.gridy = 1;
-		JLabel labelAge = new JLabel("Age: " + DatabaseGUI.DOCUMENT.get("age"));
-		panel.add(labelAge, constraints);
-		
-		constraints.gridx = 0;
-		constraints.gridy = 2;
-		JLabel labelRank = new JLabel("Rank: " + DatabaseGUI.DOCUMENT.get("rank"));
-		panel.add(labelRank, constraints);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setSize(200, 200);
+		setLocationRelativeTo(null);
 	}
 
 }
